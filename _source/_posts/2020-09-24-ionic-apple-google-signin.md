@@ -426,11 +426,18 @@ If you have an iPhone, you should be able to deploy your Ionic app to it. Plug y
 
 I really dig the Sign in with Apple experience on my iPhone 11. iOS takes over without a redirect and makes it seamless. 
 
-{% img blog/ionic-social-login/iphone-signin-apple.png alt:"Sign in with Apple on iPhone 11" width:"350" %}{: .center-image }
+{% img blog/ionic-social-login/iphone-signin-apple.png alt:"Sign in with Apple on iPhone 11" width:"400" %}{: .center-image }
 
-For me, Face ID is even part of the flow! 😃
+For me, Face ID is even part of the flow! 😃 
 
+<!--
 {% img blog/ionic-social-login/iphone-faceid.png alt:"Face ID validation on iPhone" width:"350" %}{: .center-image }
+-->
+<div class="center-image" style="max-width: 400px">
+<video autoplay loop muted width="400" height="auto" poster="{% asset_path 'blog/ionic-social-login/sign-in-demo.png' %}" onclick="this.paused ? this.play() : this.pause()">
+  <source type="video/mp4" src="https://github.com/oktadeveloper/okta-ionic-social-login-example/blob/main/src/assets/sign-in-demo.mp4?raw=true">
+</video>
+</div>
 
 ## Learn More about Ionic and Social Login
 
