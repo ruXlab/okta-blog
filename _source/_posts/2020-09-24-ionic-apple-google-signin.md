@@ -5,7 +5,7 @@ author: matt-raible
 by: advocate
 communities: [mobile,javascript]
 description: "This tutorial shows how to add social login to Ionic apps with Apple and Google."
-tags: [ionic, angular, social login, apple, google]
+tags: [ionic, angular, social-login, apple, google]
 tweets:
 - ""
 - ""
