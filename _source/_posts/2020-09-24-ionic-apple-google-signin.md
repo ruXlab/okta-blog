@@ -84,7 +84,6 @@ If you're using the command line, you'll have to use your browser to adjust the 
 
 {% img blog/ionic-social-login/okta-native-app.png alt:"Okta Native app settings" width:"700" %}{: .center-image }
 
-
 Run the following command to add a sign-in feature to your Ionic + Capacitor app. 
 
 ```shell
@@ -143,17 +142,13 @@ Run `ionic serve` and open `http://localhost:8100` in a new incognito window.
 
 {% img blog/ionic-social-login/ionic-login.png alt:"Ionic with Login button" width:"800" %}{: .center-image }
 
-
-
 Click **Login** to sign in to your Okta developer account.
 
 {% img blog/ionic-social-login/okta-login.png alt:"Okta Login Form" width:"800" %}{: .center-image }
 
-
 You'll be redirected back to your app.
 
 {% img blog/ionic-social-login/okta-login-success.png alt:"Okta Login Success" width:"800" %}{: .center-image }
-
 
 Click **Get User Details** to fetch the user's information using the following code in `src/app/tab1/tab1.page.ts`.
 
@@ -230,7 +225,6 @@ Click **Add Identity Provider**. Click the arrow next to your new IdP, and you'l
 
 {% img blog/ionic-social-login/apple-identity-provider.png alt:"Apple Identity Provider" width:"800" %}{: .center-image }
 
-
 Copy this ID and open `src/app/auth/auth.service.ts` in a text editor. Add `auth_extras` as a property to `authConfig` and add your Apple IdP's ID as an `idp` property.
 
 ```ts
@@ -255,9 +249,7 @@ Log in, and you should be redirected back to your app.
 
 Click **Get User Details**, and your info will be fetched from Apple via Okta.
 
-{% img blog/ionic-social-login/apple-get-user-details.png alt:"Apple Get User Details" width:"800" %}{: .center-image }
-
-
+{% img blog/ionic-social-login/apple-get-user-details.png alt:"Apple Get User Details" width:"750" %}{: .center-image }
 
 It's pretty cool that you can add Sign in with Apple via Okta, don't you think?! 
  
@@ -321,8 +313,6 @@ You need to update your authorization server to use your custom domain to fix th
 
 {% img blog/ionic-social-login/as-custom-url.png alt:"Authorization Server Custom URL" width:"700" %}{: .center-image }
 
-
-
 Try `/openid-configuration` again; it should have your custom domain now.
 
 ### Configure Apple to allow your custom domain
@@ -335,7 +325,6 @@ Since you've added a new domain, you've created another possible redirect URL. L
 You can see the values I used below.
 
 {% img blog/ionic-social-login/apple-website-urls.png alt:"Apple website URLs for id.mattraible.com" width:"650" %}{: .center-image }
-
 
 Click **Done**, **Continue**, and **Save**.
 
