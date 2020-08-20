@@ -39,7 +39,7 @@ Today I'd like to show you how to develop a mobile application with Ionic, add O
 * Table of Contents
 {:toc}
 
-## Create an Ionic app
+## Create an Ionic App
 
 To begin, you'll need to install the [Ionic CLI](https://ionicframework.com/docs/cli/). 
 
@@ -58,8 +58,7 @@ Run `ionic serve` and make sure you can see the app in your browser.
 
 {% img blog/ionic-social-login/ionic-serve.png alt:"First look at Ionic" width:"800" %}{: .center-image }
 
-
-## Add authentication with OpenID Connect
+## Add Authentication with OpenID Connect
 
 The easiest way to add OIDC authentication to an Ionic app is with OktaDev Schematics. Before I show you how to do that, you'll need to create an Okta developer account and register your app to get a client ID. Head on over to [developer.okta.com/signup](https://developer.okta.com/signup) if you'd like to do this in your browser. 
 
@@ -195,7 +194,7 @@ Enter the domain name where your app runs in the **Domains and Subdomains** box 
 
 Click **Next**, **Done**, **Continue**, and then **Save**. 
 
-### Create a private key for client authentication
+### Create a Private Key for Client Authentication
 
 On the **Certificates, Identifiers, & Profiles** page, select **Keys**, and then **Create a key**.
 
@@ -211,7 +210,7 @@ Make a note of your Team ID in the upper-right corner of your Apple developer da
 
 **TIP**: See Okta's [developer docs for Sign in with Apple](https://developer.okta.com/docs/guides/add-an-external-idp/apple/create-an-app-at-idp/) if these steps don't work.
 
-### Add Apple as an identity provider in Okta
+### Add Apple as an Identity Provider in Okta
 
 Open your Okta developer console in a new tab and navigate to **Users** > **Social & Identity Providers** > **Add Identity Provider** > **Add Apple**. 
 
@@ -242,7 +241,6 @@ and you'll be redirected to Apple to sign in.
 
 {% img blog/ionic-social-login/apple-login.png alt:"Apple Login Form" width:"800" %}{: .center-image }
 
-
 Log in, and you should be redirected back to your app. 
 
 **NOTE**: If you receive an error about `Missing fields: 'firstName','lastName'`, you'll need to remove the app from your Apple ID. On Mac, go to **System Preferences** > **Apple ID** > **Password & Security** > Apps Using Your Apple ID > **Edit**. Go to **Ionic Social** and click **Stop Using Apple ID**. This error happens because Apple sends the name only the very first time you log in. 
@@ -267,7 +265,7 @@ I thought the [Capacitor Community's HTTP module](https://github.com/capacitor-c
 
 In the meantime, you can customize the Okta-hosted version of the Sign-In Widget. To do this, you need to create a custom domain.
 
-## Create a custom domain and TLS certificate with Cloudflare
+## Create a Custom Domain and TLS Certificate with Cloudflare
 
 To use a custom domain with Okta, you need to have access to its DNS settings and create a TLS certificate. 
 
@@ -302,12 +300,11 @@ You'll be prompted to add a CNAME record. Add this to your Cloudflare DNS. Click
 
 Wait until `https://<id.domain.name>` resolves in your browser before continuing.
 
-### Configure a custom domain for your authorization server
+### Configure a Custom Domain for Your Authorization Server
 
 The OpenID Connect specification requires a `./well-known/openid-configuration` endpoint with metadata about your app's endpoints. You should be able to see yours at `https://<id.domain.name>/oauth2/default/.well-known/openid-configuration`. You might notice that it has your Okta `dev-*` domain, rather than your custom domain name.
 
 {% img blog/ionic-social-login/openid-configuration.png alt:"OIDC configuration endpoint JSON" width:"800" %}{: .center-image }
-
 
 You need to update your authorization server to use your custom domain to fix this. Log in to your Okta account and go to **API** > **Authorization Servers** > **default** > **Edit**. Change the **Issuer** to use **Custom URL**. 
 
@@ -315,7 +312,7 @@ You need to update your authorization server to use your custom domain to fix th
 
 Try `/openid-configuration` again; it should have your custom domain now.
 
-### Configure Apple to allow your custom domain
+### Configure Apple to Allow Your Custom Domain
 
 Since you've added a new domain, you've created another possible redirect URL. Log in to your [Apple developer account](https://developer.apple.com) and go to the Service ID you created. Edit your service and configure Sign in with Apple. Add a new Website URL with your domain and authorize callback. 
 
@@ -328,7 +325,7 @@ You can see the values I used below.
 
 Click **Done**, **Continue**, and **Save**.
 
-### Configure Ionic to use your custom domain
+### Configure Ionic to use Your Custom Domain
 
 Open `src/app/auth/auth.service.ts` in your Ionic app and change the configuration to use your custom domain. Remove `auth_extras` too.
 
@@ -346,7 +343,7 @@ const authConfig: any = {
 
 Now you can customize the Okta-hosted Sign-In Widget. 
 
-### Add Sign in with Apple to the hosted Sign-In Widget
+### Add Sign in with Apple to the Hosted Sign-In Widget
 
 In Okta, go to **Customization** > **Sign-in Page**. Make sure you're using the latest version, then modify the HTML on the right. Find the line with `var config` and add the following after it, where `<apple-idp-id>` can be found at **Users** > **Social & Identity Providers** > **(>)** before Apple.
 
@@ -363,8 +360,7 @@ Navigate to your custom `id.domain.name`, and you should see a **Sign in with Ap
 
 {% img blog/ionic-social-login/okta-apple-signin.png alt:"Okta widget with Sign in with Apple" width:"800" %}{: .center-image }
 
-
-## Add Social login with Google
+## Add Social Login with Google
 
 If you want to add Sign in with Google, you can do it with very similar steps. Rather than repeat all the steps verbatim here, I invite you to check out Okta's [Google Social Login Guide](https://developer.okta.com/docs/guides/add-an-external-idp/google/create-an-app-at-idp/). 
 
@@ -383,8 +379,7 @@ Click **Save and Publish**. Now you should be able to sign in with Apple or Goog
 
 {% img blog/ionic-social-login/okta-apple-google-signin.png alt:"Okta widget with Apple and Google" width:"800" %}{: .center-image }
 
-
-## Run your Ionic app in iOS Simulator 
+## Run Your Ionic App in iOS Simulator 
 
 To build your app and run it on iOS Simulator, run the following commands:
 
@@ -415,21 +410,15 @@ In Xcode, go to **App** > **Signing & Capabilities** and select your team. Then,
 
 {% img blog/ionic-social-login/ionic-on-simulator.png alt:"Ionic on Simulator" width:"350" %}{: .center-image }
 
-
 **NOTE:** If you want to debug your Ionic app in Simulator, you can use Safari to debug Simulator in its **Develop** menu.  
 
 Sign in with Apple and then click the button to get your user details. You should see everything working.
 
 {% img blog/ionic-social-login/ionic-simulator-apple-details.png alt:"Apple User Details in Simulator" width:"350" %}{: .center-image }
 
-
-
 Google should work too!
 
 {% img blog/ionic-social-login/ionic-simulator-google-details.png alt:"Google User Details in Simulator" width:"350" %}{: .center-image }
-
-
-
 
 ## Deploy Ionic App to iOS Phone
 
@@ -439,10 +428,7 @@ I dig the Sign in with Apple experience on my iPhone 11! iOS takes over without 
 
 {% img blog/ionic-social-login/iphone-signin-apple.png alt:"Sign in with Apple on iPhone 11" width:"350" %}{: .center-image }
 
-
-
 For me, Face ID is even part of the flow! 😃
-
 
 <div class="center-image" style="max-width: 400px">
 <video autoplay loop muted width="400" height="auto" poster="{% asset_path 'blog/ionic-social-login/sign-in-demo.png' %}" onclick="this.paused ? this.play() : this.pause()">
@@ -466,7 +452,7 @@ In addition to Apple and Google, we also support signing in with [Azure AD](http
 Some other resources you might like:
 
 - [Apple's Sign in with Apple Guidelines](https://developer.apple.com/app-store/review/guidelines/#sign-in-with-apple)
-- [Thanks to Capacitor, I’ve fallen in love with mobile development again](https://ionicframework.com/blog/thanks-to-capacitor-ive-fallen-in-love-with-mobile-development-again/)
+- [Thanks to Capacitor, I've fallen in love with mobile development again](https://ionicframework.com/blog/thanks-to-capacitor-ive-fallen-in-love-with-mobile-development-again/)
 - [What the Heck is Sign In with Apple?](https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple)
 - [Build Mobile Apps with Angular, Ionic 4, and Spring Boot](https://developer.okta.com/blog/2019/06/24/ionic-4-angular-spring-boot-jhipster)
 - [Mobile Development with Ionic, React Native, and JHipster](https://developer.okta.com/blog/2020/04/27/mobile-development-ionic-react-native-jhipster)
